@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="HomeRadar.Views.MenuView"
+             Title=" ">
+
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid BackgroundColor="{StaticResource FutureInnovationTechDark}" Opacity="0.8"/>
+            <Label Text="{Binding WelcomeText}" TextColor="Black" Style="{StaticResource MenuLabelStyle}"/>
+        </Grid>
+        
+    </Grid>
+</ContentPage>
