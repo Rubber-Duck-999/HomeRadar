@@ -1,9 +1,6 @@
-name: CI on Push and Pull Request
+name: Continuous Integration
 
-on: 
-  push:
-    tags:
-    - '*'
+on: [push]
 
 jobs:
   Practice:
