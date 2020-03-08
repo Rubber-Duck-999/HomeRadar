@@ -34,7 +34,7 @@ jobs:
       run: |
         nuget restore
         cd HomeRadar.Android
-        msbuild Blank.Android.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
+        msbuild HomeRadar.Android.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
   iOS:
 
     runs-on: macos-latest
@@ -47,4 +47,4 @@ jobs:
       run: |
         cd HomeRadar.iOS
         nuget restore
-        msbuild HomeRadar.iOS/HomeRadar.iOS.csproj /verbosity:normal /t:Rebuild /p:Platform=iPhoneSimulator /p:Configuration=Debug
+        msbuild HomeRadar.iOS.csproj /verbosity:normal /t:Rebuild /p:Platform=iPhoneSimulator /p:Configuration=Debug
