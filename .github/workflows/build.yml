@@ -47,4 +47,5 @@ jobs:
       run: |
         cd HomeRadar.iOS
         nuget restore
+        ls
         msbuild HomeRadar.iOS.csproj /verbosity:normal /t:Rebuild /p:Platform=iPhoneSimulator /p:Configuration=Debug
