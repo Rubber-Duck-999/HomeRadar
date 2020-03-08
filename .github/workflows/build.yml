@@ -49,3 +49,18 @@ jobs:
         cd HomeRadar.iOS
         ls
         msbuild HomeRadar.iOS.csproj /verbosity:normal /t:Rebuild /p:Platform=iPhoneSimulator /p:Configuration=Debug
+        
+  Test:
+
+    runs-on: windows-latest
+    
+    steps:
+
+    - uses: actions/checkout@v1
+      
+    - name: Run
+      run: |
+        nuget restore
+        cd HomeRadar.Tests
+        ls
+        dotnet test
