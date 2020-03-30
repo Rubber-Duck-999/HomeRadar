@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:templates="clr-namespace:HomeRadar.Templates"
+             xmlns:behaviours="clr-namespace:HomeRadar.Behaviours"
              mc:Ignorable="d"
              x:Class="HomeRadar.Views.MenuView"
              Title=" ">
@@ -22,6 +23,9 @@
         <Grid Grid.Row="1" BackgroundColor="{StaticResource FutureInnovationTechLight}">
             <ListView ItemsSource="{Binding MenuItems}"  CachingStrategy="RecycleElement"
                       SeparatorVisibility="None" HasUnevenRows="True" >
+                <ListView.Behaviors>
+                    <behaviours:EventToCommandBehaviour EventName="ItemTapped" Command="{Binding MenuItemTappedCommand}"></behaviours:EventToCommandBehaviour>
+                </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
