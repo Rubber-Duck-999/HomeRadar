@@ -7,7 +7,7 @@ namespace HomeRadar.ViewModels.Base
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
-    using Bookamare.Mobile.Annotations;
+    using Annotations;
     using HomeRadar.Contracts;
 
     /// <summary>

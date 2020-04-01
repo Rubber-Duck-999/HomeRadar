@@ -39,7 +39,7 @@ SOFTWARE. */
 // ReSharper disable IntroduceOptionalParameters.Global
 // ReSharper disable MemberCanBeProtected.Global
 // ReSharper disable InconsistentNaming
-namespace Bookamare.Mobile.Annotations
+namespace Annotations
 #pragma warning restore SA1633 // File should have header
 {
   using System;
