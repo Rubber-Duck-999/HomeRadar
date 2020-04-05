@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:templates="clr-namespace:HomeRadar.Templates"
+             xmlns:behaviours="clr-namespace:HomeRadar.Behaviours"
              mc:Ignorable="d"
              x:Class="HomeRadar.Views.MenuView"
              Title=" ">
@@ -17,6 +19,22 @@
             <Grid BackgroundColor="{StaticResource FutureInnovationTechDark}" Opacity="0.8"/>
             <Label Text="{Binding WelcomeText}" TextColor="Black" Style="{StaticResource MenuLabelStyle}"/>
         </Grid>
-        
+
+        <Grid Grid.Row="1" BackgroundColor="{StaticResource FutureInnovationTechLight}">
+            <ListView ItemsSource="{Binding MenuItems}"  CachingStrategy="RecycleElement"
+                      SeparatorVisibility="None" HasUnevenRows="True" >
+                <ListView.Behaviors>
+                    <behaviours:EventToCommandBehaviour EventName="ItemTapped" Command="{Binding MenuItemTappedCommand}"></behaviours:EventToCommandBehaviour>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <templates:MenuItemTemplate />
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
     </Grid>
 </ContentPage>
