@@ -1,4 +1,6 @@
 # HomeRadar
+![Continuous Integration](https://github.com/Rubber-Duck-999/HomeRadar/workflows/Continuous%20Integration/badge.svg?branch=master)
+
 Xamarin forms app that can perform network scans to alert users of vulnerabilities
 
 ## Installation
