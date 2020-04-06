@@ -4,18 +4,17 @@
 
 namespace HomeRadar.ViewModels
 {
-  using System;
   using System.Collections.ObjectModel;
-    using System.Windows.Input;
-    using HomeRadar.Contracts;
+  using System.Windows.Input;
+  using HomeRadar.Contracts;
   using HomeRadar.Models;
   using HomeRadar.ViewModels.Base;
-    using Xamarin.Forms;
+  using Xamarin.Forms;
 
-    /// <summary>
-    /// The following class defines the ViewModel for the menu view.
-    /// </summary>
-    public class MenuViewModel : ViewModelBase
+  /// <summary>
+  /// The following class defines the ViewModel for the menu view.
+  /// </summary>
+  public class MenuViewModel : ViewModelBase
   {
     /// <summary>
     /// Container for the menu items.
@@ -66,14 +65,14 @@ namespace HomeRadar.ViewModels
       {
         MenuText = "Home Radar",
         ViewModelToLoad = typeof(PrimaryViewModel),
-        MenuItemType = MenuItemType.HomeRadar,
+        MenuItemType = MenuItemType.Home,
       });
     }
 
     /// <summary>
     /// Provides navigation based on menu item pressed.
     /// </summary>
-    /// <param name="menuItemTappedEventArgs">The menu item event args</param>
+    /// <param name="menuItemTappedEventArgs">The menu item event args.</param>
     private void OnMenuItemTapped(object menuItemTappedEventArgs)
     {
       var menuItem = (menuItemTappedEventArgs as ItemTappedEventArgs)?.Item as MainMenuItem;

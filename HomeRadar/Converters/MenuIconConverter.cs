@@ -9,6 +9,9 @@ namespace HomeRadar.Converters
   using HomeRadar.Models;
   using Xamarin.Forms;
 
+  /// <summary>
+  /// Cross references a MenuItemType to it's icon.
+  /// </summary>
   public class MenuIconConverter : IValueConverter
   {
     /// <inheritdoc/>
@@ -18,7 +21,7 @@ namespace HomeRadar.Converters
 
       switch (type)
       {
-        case MenuItemType.HomeRadar:
+        case MenuItemType.Home:
           return "ic_home.png";
         default:
           return string.Empty;

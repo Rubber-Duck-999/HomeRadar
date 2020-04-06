@@ -9,7 +9,7 @@ namespace HomeRadar.Services
   using System.Runtime.CompilerServices;
   using Annotations;
   using HomeRadar.Contracts;
-  using Wrappers;
+  using HomeRadar.Wrappers;
   using Xamarin.Essentials;
 
   /// <summary>
@@ -19,14 +19,14 @@ namespace HomeRadar.Services
   public class ConnectionStatusProvider : IConnectionStatusProvider, INotifyPropertyChanged
   {
     /// <summary>
+    /// Provides access to the connectivity wrapper.
+    /// </summary>
+    private readonly IConnectivityWrapper connectivityWrapper;
+
+    /// <summary>
     /// The following attribute stores whether or not the device is connected to a network.
     /// </summary>
     private bool isConnected;
-
-    /// <summary>
-    /// Provides access to the connectivity wrapper.
-    /// </summary>
-    private IConnectivityWrapper connectivityWrapper;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ConnectionStatusProvider"/> class.
@@ -60,6 +60,16 @@ namespace HomeRadar.Services
     }
 
     /// <summary>
+    /// Forwards the notification to the app that a property has changed.
+    /// </summary>
+    /// <param name="propertyName">The name of the property that has changed.</param>
+    [NotifyPropertyChangedInvocator]
+    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    {
+      this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    /// <summary>
     /// Updates the apps connectivity based on NetworkAccess.
     /// </summary>
     /// <param name="connectivityType">Current connectivity type.</param>
@@ -80,17 +90,6 @@ namespace HomeRadar.Services
         default:
           throw new ArgumentOutOfRangeException(nameof(connectivityType), connectivityType, null);
       }
-    }
-
-
-    /// <summary>
-    /// Forwards the notification to the app that a property has changed.
-    /// </summary>
-    /// <param name="propertyName">The name of the property that has changed.</param>
-    [NotifyPropertyChangedInvocator]
-    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-    {
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
   }
 }
