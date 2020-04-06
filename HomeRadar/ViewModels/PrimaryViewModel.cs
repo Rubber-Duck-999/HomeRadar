@@ -1,26 +1,25 @@
-﻿// <copyright file="HomeRadarViewModel.cs" company="FutureInnovationTech">
+﻿// <copyright file="PrimaryViewModel.cs" company="FutureInnovationTech">
 // Copyright (c) FutureInnovationTech. All rights reserved.
 // </copyright>
 
 namespace HomeRadar.ViewModels
 {
-    using HomeRadar.Contracts;
-    using HomeRadar.ViewModels.Base;
+  using HomeRadar.Contracts;
+  using HomeRadar.ViewModels.Base;
 
+  /// <summary>
+  /// The following class defines the ViewModel for the HomeRadar Home Page.
+  /// </summary>
+  public class PrimaryViewModel : ViewModelBase
+  {
     /// <summary>
-    /// The following class defines the ViewModel for providing
-    /// the information about ---- place statement here ----.
+    /// Initializes a new instance of the <see cref="PrimaryViewModel"/> class.
     /// </summary>
-    public class PrimaryViewModel : ViewModelBase
+    /// <param name="navigationService">The App NavigationService.</param>
+    public PrimaryViewModel(INavigationService navigationService)
+      : base(navigationService)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PrimaryViewModel"/> class.
-        /// </summary>
-        /// <param name="navigationService">The App NavigationService.</param>
-        public PrimaryViewModel(INavigationService navigationService)
-          : base(navigationService)
-        {
-            this.ShortTitle = "Home Radar";
-        }
+      this.ShortTitle = "Home Radar";
     }
+  }
 }

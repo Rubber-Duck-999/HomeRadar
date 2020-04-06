@@ -1,19 +1,24 @@
-﻿using System.ComponentModel;
-using Xamarin.Forms;
+﻿// <copyright file="MenuView.xaml.cs" company="FutureInnovationTech">
+// Copyright (c) FutureInnovationTech. All rights reserved.
+// </copyright>
 
 namespace HomeRadar.Views
 {
-    // Learn more about making custom code visible in the Xamarin.Forms previewer
-    // by visiting https://aka.ms/xamarinforms-previewer
-    [DesignTimeVisible(false)]
-    public partial class MenuView : ContentPage
+  using System.ComponentModel;
+  using Xamarin.Forms;
+
+  /// <summary>
+  /// The following class defines the code behind for the Menu View page.
+  /// </summary>
+  [DesignTimeVisible(false)]
+  public partial class MenuView : ContentPage
+  {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MenuView"/> class.
+    /// </summary>
+    public MenuView()
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MenuView"/> class.
-        /// </summary>
-        public MenuView()
-        {
-            this.InitializeComponent();
-        }
+      this.InitializeComponent();
     }
+  }
 }

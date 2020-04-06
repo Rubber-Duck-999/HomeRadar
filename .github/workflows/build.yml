@@ -1,0 +1,66 @@
+name: Continuous Integration
+
+on: [push]
+
+jobs:
+  Practice:
+
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run a one-line script
+      run: echo Hello, world!
+    - name: Run a multi-line script
+      run: |
+        echo Add other actions to build,
+        echo test, and deploy your project.
+    - name: Show what in there
+      run: |
+        ls
+    - name: Show what it's inside
+      run: |
+        cd ..
+        ls
+  Android:
+
+    runs-on: macos-latest
+    
+    steps:
+
+    - uses: actions/checkout@v1
+      
+    - name: Android
+      run: |
+        nuget restore
+        cd HomeRadar.Android
+        msbuild HomeRadar.Android.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
+  iOS:
+
+    runs-on: macos-latest
+    
+    steps:
+
+    - uses: actions/checkout@v1
+      
+    - name: iOS
+      run: |
+        nuget restore
+        cd HomeRadar.iOS
+        ls
+        msbuild HomeRadar.iOS.csproj /verbosity:normal /t:Rebuild /p:Platform=iPhoneSimulator /p:Configuration=Debug
+        
+  Test:
+
+    runs-on: macos-latest
+    
+    steps:
+
+    - uses: actions/checkout@v1
+      
+    - name: Run
+      run: |
+        nuget restore
+        cd HomeRadar.Tests
+        ls
+        dotnet test
