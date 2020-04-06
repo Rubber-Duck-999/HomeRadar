@@ -52,7 +52,7 @@ jobs:
         
   Test:
 
-    runs-on: windows-latest
+    runs-on: macos-latest
     
     steps:
 
