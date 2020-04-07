@@ -20,7 +20,7 @@ namespace HomeRadar.Tests.Helpers
     public static ConnectionStatusProvider GetConnectionStatusProvider(NetworkAccess networkAccess)
     {
       // Create mock connectivity wrapper, we are not testing 3rd party code so we can mock it out.
-      var connectivityWrapper = Helpers.MockFactory.CreateConnectionStatusProvider(networkAccess);
+      var connectivityWrapper = Helpers.MockFactory.CreateMockConnectivityWrapper(networkAccess);
 
       // Create connectivity provider passing our mock connectivity wrapper
       var connectionStatusProvider = new ConnectionStatusProvider(connectivityWrapper.Object);

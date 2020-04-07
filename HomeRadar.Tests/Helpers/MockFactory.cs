@@ -15,12 +15,12 @@ namespace HomeRadar.Tests.Helpers
   public class MockFactory
   {
     /// <summary>
-    /// Creates an IConnectionStatusProvider moq object.
-    /// Sets up the object to moq the in use 3rd party.
+    /// Creates an IConnectivityWrapper moq object.
+    /// Sets up the object to moq the 3rd party.
     /// </summary>
     /// <param name="networkAccess">Current network access.</param>
     /// <returns>An IConnectionStatusProvider moq object.</returns>
-    public static Mock<IConnectivityWrapper> CreateConnectionStatusProvider(NetworkAccess networkAccess)
+    public static Mock<IConnectivityWrapper> CreateMockConnectivityWrapper(NetworkAccess networkAccess)
     {
       var mockConnectionStatus = new Mock<IConnectivityWrapper>();
       mockConnectionStatus.Setup(c => c.TypeOfAccess()).Returns(networkAccess);
