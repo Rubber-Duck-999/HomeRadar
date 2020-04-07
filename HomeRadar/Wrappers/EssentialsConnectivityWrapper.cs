@@ -4,6 +4,7 @@
 
 namespace HomeRadar.Wrappers
 {
+  using HomeRadar.Wrappers.Contracts;
   using Xamarin.Essentials;
 
   /// <summary>

@@ -2,7 +2,7 @@
 // Copyright (c) FutureInnovationTech. All rights reserved.
 // </copyright>
 
-namespace HomeRadar.Wrappers
+namespace HomeRadar.Wrappers.Contracts
 {
   using Xamarin.Essentials;
 

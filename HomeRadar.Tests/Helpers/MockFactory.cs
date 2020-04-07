@@ -4,9 +4,8 @@
 
 namespace HomeRadar.Tests.Helpers
 {
-  using Contracts;
+  using HomeRadar.Wrappers.Contracts;
   using Moq;
-  using Wrappers;
   using Xamarin.Essentials;
 
   /// <summary>

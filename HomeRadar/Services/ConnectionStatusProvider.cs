@@ -9,7 +9,7 @@ namespace HomeRadar.Services
   using System.Runtime.CompilerServices;
   using Annotations;
   using HomeRadar.Contracts;
-  using HomeRadar.Wrappers;
+  using HomeRadar.Wrappers.Contracts;
   using Xamarin.Essentials;
 
   /// <summary>
