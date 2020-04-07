@@ -4,6 +4,7 @@
 
 namespace HomeRadar.Wrappers
 {
+  using System;
   using HomeRadar.Wrappers.Contracts;
   using Xamarin.Essentials;
 
@@ -12,6 +13,13 @@ namespace HomeRadar.Wrappers
   /// </summary>
   public class EssentialsConnectivityWrapper : IConnectivityWrapper
   {
+    /// <inheritdoc/>
+    public event EventHandler<ConnectivityChangedEventArgs> ConnectivityChanged
+    {
+      add => Connectivity.ConnectivityChanged += value;
+      remove => Connectivity.ConnectivityChanged -= value;
+    }
+
     /// <inheritdoc/>
     public NetworkAccess TypeOfAccess()
     {

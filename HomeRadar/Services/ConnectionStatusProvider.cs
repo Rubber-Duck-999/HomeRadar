@@ -35,6 +35,7 @@ namespace HomeRadar.Services
     public ConnectionStatusProvider(IConnectivityWrapper connectivityWrapper)
     {
       this.connectivityWrapper = connectivityWrapper;
+      this.connectivityWrapper.ConnectivityChanged += this.ConnectivityWrapper_ConnectivityChanged;
       this.CheckConnection();
     }
 
@@ -47,8 +48,11 @@ namespace HomeRadar.Services
       get => this.isConnected;
       set
       {
-        this.isConnected = value;
-        this.OnPropertyChanged(nameof(this.IsConnected));
+        if (this.IsConnected != value)
+        {
+          this.isConnected = value;
+          this.OnPropertyChanged(nameof(this.IsConnected));
+        }
       }
     }
 
@@ -67,6 +71,18 @@ namespace HomeRadar.Services
     protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
     {
       this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    /// <summary>
+    /// Called when the device connectivity changes and checks the current connection.
+    /// </summary>
+    /// <param name="sender">Sending object.</param>
+    /// <param name="e">Event arguments for ConnectivityChanged event.</param>
+    // ToDo: Again we have a coupling with Xamarin.Essentials here. I would suggest we should be using this but we could also
+    // add a layer of abstraction if we want to do so.
+    private void ConnectivityWrapper_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+    {
+      this.CheckConnection();
     }
 
     /// <summary>

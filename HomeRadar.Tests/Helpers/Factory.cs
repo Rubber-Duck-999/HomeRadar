@@ -5,6 +5,7 @@
 namespace HomeRadar.Tests.Helpers
 {
   using HomeRadar.Services;
+  using HomeRadar.Wrappers.Contracts;
   using Xamarin.Essentials;
 
   /// <summary>
@@ -24,6 +25,19 @@ namespace HomeRadar.Tests.Helpers
 
       // Create connectivity provider passing our mock connectivity wrapper
       var connectionStatusProvider = new ConnectionStatusProvider(connectivityWrapper.Object);
+
+      return connectionStatusProvider;
+    }
+
+    /// <summary>
+    /// Creates a ConnectionStatusProvider using provided mock ConnectivityWrapper.
+    /// </summary>
+    /// <param name="connectivityWrapper">ConnectivityWrapper.</param>
+    /// <returns>A ConnectionStatusProvider.</returns>
+    public static ConnectionStatusProvider GetConnectionStatusProvider(IConnectivityWrapper connectivityWrapper)
+    {
+      // Create connectivity provider passing our mock connectivity wrapper
+      var connectionStatusProvider = new ConnectionStatusProvider(connectivityWrapper);
 
       return connectionStatusProvider;
     }
