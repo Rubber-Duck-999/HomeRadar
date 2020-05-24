@@ -15,6 +15,6 @@ namespace HomeRadar.Core.Wrappers.Contracts
     /// Provides the type of access currently available.
     /// </summary>
     /// <returns>A NetworkAccess value.</returns>
-    NetworkAccess TypeOfAccess();
+    NetworkAccessType TypeOfAccess();
   }
 }
