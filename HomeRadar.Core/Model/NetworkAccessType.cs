@@ -1,4 +1,4 @@
-﻿// <copyright file="NetworkAccess.cs" company="FutureInnovationTech">
+﻿// <copyright file="NetworkAccessType.cs" company="FutureInnovationTech">
 // Copyright (c) FutureInnovationTech. All rights reserved.
 // </copyright>
 
@@ -7,7 +7,7 @@ namespace HomeRadar.Core.Model
   /// <summary>
   /// Enum for network connection types.
   /// </summary>
-  public enum NetworkAccess
+  public enum NetworkAccessType
   {
     /// <summary>
     /// Represents an unknown connection type.
