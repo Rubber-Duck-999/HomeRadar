@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRadar.iOS", "HomeRadar.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeRadar", "HomeRadar\HomeRadar.csproj", "{9B5FD919-0F15-4D9D-B60E-9D4BF3A12105}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeRadar.Tests", "HomeRadar.Tests\HomeRadar.Tests.csproj", "{0C0BF181-C3EA-4F0B-B83C-42FC021B56B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeRadar.Core.Tests", "HomeRadar.Core.Tests\HomeRadar.Core.Tests.csproj", "{0C0BF181-C3EA-4F0B-B83C-42FC021B56B5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRadar.Core", "HomeRadar.Core\HomeRadar.Core.csproj", "{BC34EBD1-D0C1-41CD-95F6-63E48A6EA0F8}"
 EndProject

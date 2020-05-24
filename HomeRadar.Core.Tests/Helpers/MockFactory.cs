@@ -2,12 +2,11 @@
 // Copyright (c) FutureInnovationTech. All rights reserved.
 // </copyright>
 
-namespace HomeRadar.Tests.Helpers
+namespace HomeRadar.Core.Tests.Helpers
 {
-  using Contracts;
+  using HomeRadar.Core.Model;
+  using HomeRadar.Core.Wrappers.Contracts;
   using Moq;
-  using Wrappers;
-  using Xamarin.Essentials;
 
   /// <summary>
   /// The following class acts as a factory for Mock objects creating using
@@ -21,7 +20,7 @@ namespace HomeRadar.Tests.Helpers
     /// </summary>
     /// <param name="networkAccess">Current network access.</param>
     /// <returns>An IConnectionStatusProvider moq object.</returns>
-    public static Mock<IConnectivityWrapper> CreateConnectionStatusProvider(NetworkAccess networkAccess)
+    public static Mock<IConnectivityWrapper> CreateConnectionStatusProvider(NetworkAccessType networkAccess)
     {
       var mockConnectionStatus = new Mock<IConnectivityWrapper>();
       mockConnectionStatus.Setup(c => c.TypeOfAccess()).Returns(networkAccess);

@@ -2,10 +2,10 @@
 // Copyright (c) FutureInnovationTech. All rights reserved.
 // </copyright>
 
-namespace HomeRadar.Tests.Helpers
+namespace HomeRadar.Core.Tests.Helpers
 {
-  using HomeRadar.Services;
-  using Xamarin.Essentials;
+  using HomeRadar.Core.Model;
+  using HomeRadar.Core.Services;
 
   /// <summary>
   /// The following class creates objects to test.
@@ -17,7 +17,7 @@ namespace HomeRadar.Tests.Helpers
     /// </summary>
     /// <param name="networkAccess">Current Network Access.</param>
     /// <returns>A ConnectionStatusProvider.</returns>
-    public static ConnectionStatusProvider GetConnectionStatusProvider(NetworkAccess networkAccess)
+    public static ConnectionStatusProvider GetConnectionStatusProvider(NetworkAccessType networkAccess)
     {
       // Create mock connectivity wrapper, we are not testing 3rd party code so we can mock it out.
       var connectivityWrapper = Helpers.MockFactory.CreateConnectionStatusProvider(networkAccess);

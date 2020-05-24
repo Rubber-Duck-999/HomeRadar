@@ -2,10 +2,10 @@
 // Copyright (c) FutureInnovationTech. All rights reserved.
 // </copyright>
 
-namespace HomeRadar.Tests.ConnectedDevices
+namespace HomeRadar.Core.Tests.ConnectedDevices
 {
   using FluentAssertions;
-  using Xamarin.Essentials;
+  using HomeRadar.Core.Model;
   using Xunit;
 
   /// <summary>
@@ -20,7 +20,7 @@ namespace HomeRadar.Tests.ConnectedDevices
     public void DeviceIsConnectedToInternet_ShouldReturnTrueForConnectionStatusIsConnected()
     {
       // Arrange
-      var connectivityStatusProvider = Helpers.Factory.GetConnectionStatusProvider(NetworkAccess.Internet);
+      var connectivityStatusProvider = Helpers.Factory.GetConnectionStatusProvider(NetworkAccessType.Internet);
 
       // Act
       var isConnected = connectivityStatusProvider.IsConnected;
@@ -36,7 +36,7 @@ namespace HomeRadar.Tests.ConnectedDevices
     public void DeviceIsConnectedToLocal_ShouldReturnTrueForConnectionStatusIsConnected()
     {
       // Arrange
-      var connectivityStatusProvider = Helpers.Factory.GetConnectionStatusProvider(NetworkAccess.Local);
+      var connectivityStatusProvider = Helpers.Factory.GetConnectionStatusProvider(NetworkAccessType.Local);
 
       // Act
       var isConnected = connectivityStatusProvider.IsConnected;
@@ -52,7 +52,7 @@ namespace HomeRadar.Tests.ConnectedDevices
     public void DeviceIsConnectedToConstrainedInternet_ShouldReturnTrueForConnectionStatusIsConnected()
     {
       // Arrange
-      var connectivityStatusProvider = Helpers.Factory.GetConnectionStatusProvider(NetworkAccess.ConstrainedInternet);
+      var connectivityStatusProvider = Helpers.Factory.GetConnectionStatusProvider(NetworkAccessType.ConstrainedInternet);
 
       // Act
       var isConnected = connectivityStatusProvider.IsConnected;
@@ -68,7 +68,7 @@ namespace HomeRadar.Tests.ConnectedDevices
     public void DeviceIsConnectedToNone_ShouldReturnFalseForConnectionStatusIsConnected()
     {
       // Arrange
-      var connectivityStatusProvider = Helpers.Factory.GetConnectionStatusProvider(NetworkAccess.None);
+      var connectivityStatusProvider = Helpers.Factory.GetConnectionStatusProvider(NetworkAccessType.None);
 
       // Act
       var isConnected = connectivityStatusProvider.IsConnected;
@@ -84,7 +84,7 @@ namespace HomeRadar.Tests.ConnectedDevices
     public void DeviceIsConnectedToUnknown_ShouldReturnFalseForConnectionStatusIsConnected()
     {
       // Arrange
-      var connectivityStatusProvider = Helpers.Factory.GetConnectionStatusProvider(NetworkAccess.Unknown);
+      var connectivityStatusProvider = Helpers.Factory.GetConnectionStatusProvider(NetworkAccessType.Unknown);
 
       // Act
       var isConnected = connectivityStatusProvider.IsConnected;
