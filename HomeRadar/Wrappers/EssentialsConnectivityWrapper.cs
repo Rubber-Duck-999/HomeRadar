@@ -4,6 +4,8 @@
 
 namespace HomeRadar.Wrappers
 {
+  using HomeRadar.Core.Model;
+  using HomeRadar.Core.Wrappers.Contracts;
   using Xamarin.Essentials;
 
   /// <summary>
@@ -12,11 +14,22 @@ namespace HomeRadar.Wrappers
   public class EssentialsConnectivityWrapper : IConnectivityWrapper
   {
     /// <inheritdoc/>
-    public NetworkAccess TypeOfAccess()
+    public NetworkAccessType TypeOfAccess()
     {
-      // ToDo: Consider making our own NetworkAccess enum then we can map the 3rd party to ours.
-      // For now we can use Xamarin.Essentials NetworkAccess as it does what we need.
-      return Connectivity.NetworkAccess;
+      switch (Connectivity.NetworkAccess)
+      {
+        case NetworkAccess.None:
+          return NetworkAccessType.None;
+        case NetworkAccess.Local:
+          return NetworkAccessType.Local;
+        case NetworkAccess.ConstrainedInternet:
+          return NetworkAccessType.ConstrainedInternet;
+        case NetworkAccess.Internet:
+          return NetworkAccessType.Internet;
+        case NetworkAccess.Unknown:
+        default:
+          return NetworkAccessType.Unknown;
+      }
     }
   }
 }
