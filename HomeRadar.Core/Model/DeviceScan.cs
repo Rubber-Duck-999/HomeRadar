@@ -1,4 +1,4 @@
-// <copyright file="Arp.cs" company="FutureInnovationTech">
+// <copyright file="DeviceScan.cs" company="FutureInnovationTech">
 // Copyright (c) FutureInnovationTech. All rights reserved.
 // </copyright>
 
@@ -16,8 +16,12 @@ namespace HomeRadar.Core
     using System.Text;
     using System.Threading;
 
-    public class Arp
+    public class DeviceScan
     {
+        private WifiState wifi;
+
+        private IDictionary<uint, Device> devices;
+
         public void Run()
         {
             try
@@ -25,32 +29,30 @@ namespace HomeRadar.Core
                 String hostName = Dns.GetHostName();
                 Console.WriteLine("Computer name : " + hostName);
                 IPHostEntry hostInfo = Dns.GetHostEntry(hostName);
-                WifiState wifi = new WifiState();
+                this.wifi = new WifiState();
                 foreach (NetworkInterface adapter in NetworkInterface.GetAllNetworkInterfaces())
                 {
                     if (adapter.Name == "WiFi")
                     {
-                        wifi.WifiName = adapter.Name;
-                        wifi.OperationalStatus = adapter.OperationalStatus;
+                        this.wifi.WifiName = adapter.Name;
+                        this.wifi.OperationalStatus = adapter.OperationalStatus;
                         PhysicalAddress addr = adapter.GetPhysicalAddress();
                         byte[] bytes = addr.GetAddressBytes();
-                        wifi.MacAddress = string.Empty;
+                        this.wifi.MacAddress = string.Empty;
                         foreach (UnicastIPAddressInformation uipi in adapter.GetIPProperties().UnicastAddresses)
                         {
                             if ((uipi.Address.ToString().Length >= 25) && (uipi.Address.ToString().Length <= 27))
                             {
-                                wifi.Ipv6 = uipi.Address.ToString();
+                                this.wifi.Ipv6 = uipi.Address.ToString();
                             }
                             else
                             {
-                                wifi.Ipv4 = uipi.Address.ToString();
-                                wifi.Ipv4Mask = uipi.IPv4Mask.ToString();
+                                this.wifi.Ipv4 = uipi.Address.ToString();
+                                this.wifi.Ipv4Mask = uipi.IPv4Mask.ToString();
                             }
                         }
                     }
                 }
-
-                wifi.PrintAll();
 
                 Ping pingSender = new Ping();
                 PingOptions options = new PingOptions();
@@ -58,12 +60,13 @@ namespace HomeRadar.Core
                 // Use the default Ttl value which is 128,
                 // but change the fragmentation behavior.
                 options.DontFragment = true;
+                this.wifi.PrintAll();
 
                 // Create a buffer of 32 bytes of data to be transmitted.
                 string data = "aaa";
                 byte[] buffer = Encoding.ASCII.GetBytes(data);
                 int timeout = 2;
-                string broadcast = wifi.BroadcastAddress;
+                string broadcast = this.wifi.BroadcastAddress;
                 PingReply reply = pingSender.Send(broadcast, timeout, buffer, options);
                 System.Diagnostics.Process pProcess = new System.Diagnostics.Process();
                 pProcess.StartInfo.FileName = "arp";
@@ -72,6 +75,7 @@ namespace HomeRadar.Core
                 pProcess.StartInfo.RedirectStandardOutput = true;
                 pProcess.StartInfo.CreateNoWindow = true;
                 pProcess.Start();
+                this.devices = new Dictionary<uint, Device>();
                 string strOutput = pProcess.StandardOutput.ReadToEnd();
                 string[] substrings = strOutput.Split('-');
                 string mac_address = string.Empty;
@@ -83,9 +87,9 @@ namespace HomeRadar.Core
                                 + substrings[8].Substring(0, 2);
 
                 }
-                if (reply.Address.ToString() == wifi.Ipv4)
+                if (reply.Address.ToString() == this.wifi.Ipv4)
                 {
-                    mac_address = wifi.MacAddress;
+                    mac_address = this.wifi.MacAddress;
                 }
 
                 HttpClient client = new HttpClient();
