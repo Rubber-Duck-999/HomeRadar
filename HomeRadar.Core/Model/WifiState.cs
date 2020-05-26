@@ -1,3 +1,7 @@
+// <copyright file="WifiState.cs" company="FutureInnovationTech">
+// Copyright (c) FutureInnovationTech. All rights reserved.
+// </copyright>
+
 namespace HomeRadar.Core
 {
   using System;
@@ -9,8 +13,8 @@ namespace HomeRadar.Core
   /// </summary>
   public class WifiState
   {
+    public WifiState() { } 
 
-    public WifiState() {}
     /// <summary>
     /// Gets or sets the Wifi name.
     /// </summary>
@@ -67,17 +71,17 @@ namespace HomeRadar.Core
       Console.WriteLine("Broadcast Address: " + this.BroadcastAddress);
     }
 
-
     /// <summary>
     /// Calculates the broadcast address.
     /// </summary>
     private void CalculateBroadCast()
     {
-        var ip_block = Ipv4.Split(' ');
-        if(Ipv4Mask == "255.255.255.0")
+        var ip_block = this.Ipv4.Split(' ');
+        if (this.Ipv4Mask == "255.255.255.0")
         {
-            ip_block[3] = "255";
+          ip_block[3] = "255";
         }
+
         string address = ip_block[0] + "." + ip_block[1] + "." + ip_block[2] + "." + ip_block[3];
         this.BroadcastAddress = address;
     }

@@ -1,24 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Net; //Include this namespace  
-using System.Net.Sockets;
-using System.Net.NetworkInformation;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Collections;
-using System.Threading;
+// <copyright file="Device.cs" company="FutureInnovationTech">
+// Copyright (c) FutureInnovationTech. All rights reserved.
+// </copyright>
 
 namespace HomeRadar.Core
 {
-    class Device
+    using System;
+
+    public class Device
     {
-        public Device(string Mac, string IP, string Manufacturer)
+        public Device(string mac, string ip, string manufacturer)
         {
-            MacAddress = Mac;
-            Ipv4 = IP;
-            Vendor = Manufacturer;
+            this.MacAddress = mac;
+            this.Ipv4 = ip;
+            this.Vendor = manufacturer;
         }
 
         public string Vendor { get; set; }
