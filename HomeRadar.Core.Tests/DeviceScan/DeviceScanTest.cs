@@ -4,8 +4,10 @@
 
 namespace HomeRadar.Core.Tests.DeviceScan
 {
+  using System;
   using FluentAssertions;
   using HomeRadar.Core.Model;
+  using System.Net.NetworkInformation;
   using Xunit;
 
   /// <summary>
@@ -21,10 +23,19 @@ namespace HomeRadar.Core.Tests.DeviceScan
     {
       // Arrange
       HomeRadar.Core.DeviceScan scan = new HomeRadar.Core.DeviceScan();
+      Assert.True(string.IsNullOrEmpty(scan.network_adapter.HostName));
+
+      // Run scan
       scan.Run();
 
-      // Assert
-      Assert.False(false);
+      // Strings should be set
+      Assert.False(string.IsNullOrEmpty(scan.network_adapter.HostName));
+      Assert.False(string.IsNullOrEmpty(scan.network_adapter.NetworkName));
+      Assert.False(string.IsNullOrEmpty(scan.network_adapter.Ipv6));
+      Assert.False(string.IsNullOrEmpty(scan.network_adapter.Ipv4));
+
+      // Status should be up
+      Assert.Equal(scan.network_adapter.OperationalStatus, OperationalStatus.Up);
     }
   }
 }

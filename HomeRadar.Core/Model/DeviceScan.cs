@@ -18,37 +18,46 @@ namespace HomeRadar.Core
 
     public class DeviceScan
     {
-        private WifiState wifi;
+        public NetworkState network_adapter;
 
         private IDictionary<uint, Device> devices;
+
+        public DeviceScan()
+        {
+            this.network_adapter = new NetworkState();
+        }
+
+        private boolean RunNmapSilently()
+        {
+            return false;
+        }
 
         public void Run()
         {
             try
             {
-                String hostName = Dns.GetHostName();
-                Console.WriteLine("Computer name : " + hostName);
-                IPHostEntry hostInfo = Dns.GetHostEntry(hostName);
-                this.wifi = new WifiState();
+                this.network_adapter = new NetworkState();
+                this.network_adapter.HostName = Dns.GetHostName();
                 foreach (NetworkInterface adapter in NetworkInterface.GetAllNetworkInterfaces())
                 {
-                    if (adapter.Name == "WiFi")
+                    Console.WriteLine(adapter);
+                    if (adapter.OperationalStatus == OperationalStatus.Up)
                     {
-                        this.wifi.WifiName = adapter.Name;
-                        this.wifi.OperationalStatus = adapter.OperationalStatus;
+                        this.network_adapter.NetworkName = adapter.Name;
+                        this.network_adapter.OperationalStatus = adapter.OperationalStatus;
                         PhysicalAddress addr = adapter.GetPhysicalAddress();
                         byte[] bytes = addr.GetAddressBytes();
-                        this.wifi.MacAddress = string.Empty;
+                        this.network_adapter.MacAddress = string.Empty;
                         foreach (UnicastIPAddressInformation uipi in adapter.GetIPProperties().UnicastAddresses)
                         {
                             if ((uipi.Address.ToString().Length >= 25) && (uipi.Address.ToString().Length <= 27))
                             {
-                                this.wifi.Ipv6 = uipi.Address.ToString();
+                                this.network_adapter.Ipv6 = uipi.Address.ToString();
                             }
                             else
                             {
-                                this.wifi.Ipv4 = uipi.Address.ToString();
-                                this.wifi.Ipv4Mask = uipi.IPv4Mask.ToString();
+                                this.network_adapter.Ipv4 = uipi.Address.ToString();
+                                this.network_adapter.Ipv4Mask = uipi.IPv4Mask.ToString();
                             }
                         }
                     }
@@ -60,13 +69,13 @@ namespace HomeRadar.Core
                 // Use the default Ttl value which is 128,
                 // but change the fragmentation behavior.
                 options.DontFragment = true;
-                this.wifi.PrintAll();
+                this.network_adapter.PrintAll();
 
                 // Create a buffer of 32 bytes of data to be transmitted.
                 string data = "aaa";
                 byte[] buffer = Encoding.ASCII.GetBytes(data);
                 int timeout = 2;
-                string broadcast = this.wifi.BroadcastAddress;
+                string broadcast = this.network_adapter.BroadcastAddress;
                 PingReply reply = pingSender.Send(broadcast, timeout, buffer, options);
                 System.Diagnostics.Process pProcess = new System.Diagnostics.Process();
                 pProcess.StartInfo.FileName = "arp";
@@ -87,9 +96,9 @@ namespace HomeRadar.Core
                                 + substrings[8].Substring(0, 2);
 
                 }
-                if (reply.Address.ToString() == this.wifi.Ipv4)
+                if (reply.Address.ToString() == this.network_adapter.Ipv4)
                 {
-                    mac_address = this.wifi.MacAddress;
+                    mac_address = this.network_adapter.MacAddress;
                 }
 
                 HttpClient client = new HttpClient();
