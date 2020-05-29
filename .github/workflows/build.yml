@@ -61,6 +61,6 @@ jobs:
     - name: Run
       run: |
         nuget restore
-        cd HomeRadar.Tests
+        cd HomeRadar.Core.Tests
         ls
         dotnet test
