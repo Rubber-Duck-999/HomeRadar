@@ -27,7 +27,7 @@ namespace HomeRadar.Core
             this.network_adapter = new NetworkState();
         }
 
-        private boolean RunNmapSilently()
+        private bool RunNmapSilently()
         {
             return false;
         }
