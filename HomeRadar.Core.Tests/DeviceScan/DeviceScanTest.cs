@@ -24,18 +24,21 @@ namespace HomeRadar.Core.Tests.DeviceScan
       // Arrange
       HomeRadar.Core.DeviceScan scan = new HomeRadar.Core.DeviceScan();
       Assert.True(string.IsNullOrEmpty(scan.network_adapter.HostName));
+      Assert.Equal(scan.network_adapter.OperatingSystem.ToString(), "WINDOWS");
 
       // Run scan
-      scan.Run();
+      scan.GetDeviceDetails();
 
       // Strings should be set
       Assert.False(string.IsNullOrEmpty(scan.network_adapter.HostName));
       Assert.False(string.IsNullOrEmpty(scan.network_adapter.NetworkName));
-      Assert.False(string.IsNullOrEmpty(scan.network_adapter.Ipv6));
       Assert.False(string.IsNullOrEmpty(scan.network_adapter.Ipv4));
+      Assert.False(string.IsNullOrEmpty(scan.network_adapter.MacAddress));
 
       // Status should be up
       Assert.Equal(scan.network_adapter.OperationalStatus, OperationalStatus.Up);
+
+      scan.FindDevices();
     }
   }
 }
