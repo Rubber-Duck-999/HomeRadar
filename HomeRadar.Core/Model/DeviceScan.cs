@@ -2,7 +2,7 @@
 // Copyright (c) FutureInnovationTech. All rights reserved.
 // </copyright>
 
-namespace HomeRadar.Core
+namespace HomeRadar.Core.Model
 {
   using System;
   using System.Collections.Generic;
@@ -13,59 +13,79 @@ namespace HomeRadar.Core
   using System.Net.Sockets;
   using System.Text;
   using System.Threading;
-  using Model;
 
+  /// <summary>
+  /// The following class handles the network scan.
+  /// </summary>
   public class DeviceScan
   {
-    public NetworkState network_adapter;
-
+    /// <summary>
+    /// Collection of devices on the network.
+    /// </summary>
     private IDictionary<uint, Device> devices;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="DeviceScan"/> class.
+    /// </summary>
     public DeviceScan()
     {
-      this.network_adapter = new NetworkState();
+      this.NetworkAdapter = new NetworkState();
     }
 
+    /// <summary>
+    /// Gets or sets the Network State.
+    /// </summary>
+    public NetworkState NetworkAdapter { get; set; }
+
+    /// <summary>
+    /// The following method gets the details of network devices.
+    /// </summary>
     public void GetDeviceDetails()
     {
-      this.network_adapter = new NetworkState();
-      this.network_adapter.HostName = Dns.GetHostName();
-      foreach (NetworkInterface adapter in NetworkInterface.GetAllNetworkInterfaces())
+      this.NetworkAdapter = new NetworkState();
+      this.NetworkAdapter.HostName = Dns.GetHostName();
+      foreach (var adapter in NetworkInterface.GetAllNetworkInterfaces())
       {
         if (adapter.OperationalStatus == OperationalStatus.Up)
         {
-          this.network_adapter.NetworkName = adapter.Name;
-          this.network_adapter.OperationalStatus = adapter.OperationalStatus;
-          this.network_adapter.MacAddress = adapter.GetPhysicalAddress().ToString();
+          this.NetworkAdapter.NetworkName = adapter.Name;
+          this.NetworkAdapter.OperationalStatus = adapter.OperationalStatus;
+          this.NetworkAdapter.MacAddress = adapter.GetPhysicalAddress().ToString();
           foreach (UnicastIPAddressInformation uipi in adapter.GetIPProperties().UnicastAddresses)
           {
             if ((uipi.Address.ToString().Length >= 25) && (uipi.Address.ToString().Length <= 27))
             {
-              this.network_adapter.Ipv6 = uipi.Address.ToString();
+              this.NetworkAdapter.Ipv6 = uipi.Address.ToString();
             }
             else
             {
-              this.network_adapter.Ipv4 = uipi.Address.ToString();
-              this.network_adapter.Ipv4Mask = uipi.IPv4Mask.ToString();
+              this.NetworkAdapter.Ipv4 = uipi.Address.ToString();
+              this.NetworkAdapter.Ipv4Mask = uipi.IPv4Mask.ToString();
             }
           }
         }
       }
     }
 
+    /// <summary>
+    /// The following method gets the devices on the network.
+    /// </summary>
     public void FindDevices()
     {
       try
       {
-        Ping pingSender = new Ping();
-        Arp arp = new Arp();
-        this.network_adapter.PrintAll();
+        var pingSender = new Ping();
+        var arp = new Arp();
+        NetworkStateUtil.PrintAll(this.NetworkAdapter);
 
         // Create a buffer of 32 bytes of data to be transmitted.
-        string data = "aaa";
+        var data = "aaa";
         byte[] buffer = Encoding.ASCII.GetBytes(data);
-        PingReply reply = pingSender.Send(this.network_adapter.BroadcastAddress,
-            2, buffer, new PingOptions());
+        PingReply reply = pingSender.Send(
+          this.NetworkAdapter.BroadcastAddress,
+          2,
+          buffer,
+          new PingOptions());
         this.devices = arp.FindDevices();
       }
       catch (SocketException e)
@@ -86,19 +106,26 @@ namespace HomeRadar.Core
         Console.WriteLine("Source : " + e.Source);
         Console.WriteLine("Message : " + e.Message);
       }
-
     }
 
+    /// <summary>
+    /// The following method gets the name of the NIC vendor.
+    /// </summary>
+    /// <param name="mac">NIC mac address.</param>
+    /// <returns>NIC vendor name.</returns>
     public string GetVendor(string mac)
     {
-      HttpClient client = new HttpClient();
-      client.BaseAddress = new Uri("https://api.macvendors.com/");
+      var client = new HttpClient
+      {
+        BaseAddress = new Uri("https://api.macvendors.com/"),
+      };
 
       // Add an Accept header for JSON format.
       client.DefaultRequestHeaders.Accept.Add(
       new MediaTypeWithQualityHeaderValue("application/json"));
 
       // List data response.
+      // ToDo: Why are we waiting here?
       Thread.Sleep(2000);
       HttpResponseMessage response = client.GetAsync(mac).Result;
 
@@ -111,7 +138,7 @@ namespace HomeRadar.Core
       }
       else
       {
-        Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+        Console.WriteLine($"{(int)response.StatusCode} ({response.ReasonPhrase})");
       }
 
       // Make any other calls using HttpClient here.
