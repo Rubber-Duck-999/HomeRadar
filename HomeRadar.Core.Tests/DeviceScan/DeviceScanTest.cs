@@ -4,11 +4,10 @@
 
 namespace HomeRadar.Core.Tests.DeviceScan
 {
-  using System;
-  using FluentAssertions;
-  using HomeRadar.Core.Model;
   using System.Net.NetworkInformation;
+  using FluentAssertions;
   using Xunit;
+  using DeviceScan = Core.DeviceScan;
 
   /// <summary>
   /// Performs tests to confirm if a device is connected to a network.
@@ -22,12 +21,20 @@ namespace HomeRadar.Core.Tests.DeviceScan
     public void DeviceScan_RunArpSuccessfully()
     {
       // Arrange
-      HomeRadar.Core.DeviceScan scan = new HomeRadar.Core.DeviceScan();
+      DeviceScan scan = new DeviceScan();
       Assert.True(string.IsNullOrEmpty(scan.network_adapter.HostName));
-      Assert.Equal(scan.network_adapter.OperatingSystem.ToString(), "WINDOWS");
+      Assert.Equal("WINDOWS", scan.network_adapter.OperatingSystem.ToString());
+      scan.network_adapter.OperatingSystem.ToString().Should().Be("WINDOWS");
 
+
+      // Act
       // Run scan
       scan.GetDeviceDetails();
+
+      // Assert
+
+      // ToDo: Note - Assertions should be
+      // Assertion(expected, actual);
 
       // Strings should be set
       Assert.False(string.IsNullOrEmpty(scan.network_adapter.HostName));
@@ -35,8 +42,17 @@ namespace HomeRadar.Core.Tests.DeviceScan
       Assert.False(string.IsNullOrEmpty(scan.network_adapter.Ipv4));
       Assert.False(string.IsNullOrEmpty(scan.network_adapter.MacAddress));
 
+      // These assertions are the same as the above but use the Fluent Assertions framework.
+      // I think they are nicer to read.
+      // Up to you whether you use fluent assertions or standard xUnit, I prefer fluent.
+      string.IsNullOrEmpty(scan.network_adapter.HostName).Should().BeFalse();
+      string.IsNullOrEmpty(scan.network_adapter.NetworkName).Should().BeFalse();
+      string.IsNullOrEmpty(scan.network_adapter.Ipv4).Should().BeFalse();
+      string.IsNullOrEmpty(scan.network_adapter.MacAddress).Should().BeFalse();
+
       // Status should be up
-      Assert.Equal(scan.network_adapter.OperationalStatus, OperationalStatus.Up);
+      Assert.Equal(OperationalStatus.Up, scan.network_adapter.OperationalStatus);
+      scan.network_adapter.OperationalStatus.Should().Be(OperationalStatus.Up);
 
       scan.FindDevices();
     }
