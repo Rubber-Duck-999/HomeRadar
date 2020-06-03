@@ -2,9 +2,8 @@
 // Copyright (c) FutureInnovationTech. All rights reserved.
 // </copyright>
 
-namespace HomeRadar.Core
+namespace HomeRadar.Core.Model
 {
-  using System;
   using System.Net.NetworkInformation;
   using System.Runtime.InteropServices;
 
@@ -14,10 +13,13 @@ namespace HomeRadar.Core
   /// </summary>
   public class NetworkState
   {
-    public NetworkState() 
-    { 
-      this.FindOS();
-    } 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="NetworkState"/> class.
+    /// </summary>
+    public NetworkState()
+    {
+      this.FindOperatingSystem();
+    }
 
     /// <summary>
     /// Gets or sets the Wifi name.
@@ -69,16 +71,15 @@ namespace HomeRadar.Core
     /// </summary>
     public string BroadcastAddress { get; set; }
 
-
     /// <summary>
     /// Calls system file to return Operating System.
     /// </summary>
-    private void FindOS()
+    private void FindOperatingSystem()
     {
       if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
       {
         this.OperatingSystem = OSPlatform.Windows;
-      } 
+      }
       else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
       {
         this.OperatingSystem = OSPlatform.OSX;
@@ -90,36 +91,20 @@ namespace HomeRadar.Core
     }
 
     /// <summary>
-    /// Prints the wifi details.
-    /// ToDo: I think this can be removed.
-    /// </summary>
-    public void PrintAll()
-    {
-      Console.WriteLine("Host Name: " + this.HostName);
-      Console.WriteLine("Wifi Name: " + this.NetworkName);
-      Console.WriteLine("Operating System: " + this.OperatingSystem);
-      Console.WriteLine("Status: " + this.OperationalStatus);
-      Console.WriteLine("MAC Address: " + this.MacAddress);
-      Console.WriteLine("IPV6: " + this.Ipv6);
-      Console.WriteLine("IPV4: " + this.Ipv4);
-      Console.WriteLine("IPV4 Subnet mask: " + this.Ipv4Mask);
-      Console.WriteLine("Vendor of Device: " + this.Vendor);
-      Console.WriteLine("Broadcast Address: " + this.BroadcastAddress);
-    }
-
-    /// <summary>
     /// Calculates the broadcast address.
     /// </summary>
     private void CalculateBroadCast()
     {
-        var ip_block = this.Ipv4.Split(' ');
-        if (this.Ipv4Mask == "255.255.255.0")
-        {
-          ip_block[3] = "255";
-        }
+      var ipBlock = this.Ipv4.Split(' ');
 
-        string address = ip_block[0] + "." + ip_block[1] + "." + ip_block[2] + "." + ip_block[3];
-        this.BroadcastAddress = address;
+      // ToDo: Remove magic strings and use constants.
+      if (this.Ipv4Mask == "255.255.255.0")
+      {
+        ipBlock[3] = "255";
+      }
+
+      var address = ipBlock[0] + "." + ipBlock[1] + "." + ipBlock[2] + "." + ipBlock[3];
+      this.BroadcastAddress = address;
     }
   }
 }

@@ -4,11 +4,10 @@
 
 namespace HomeRadar.Core.Tests.DeviceScan
 {
-  using System;
-  using FluentAssertions;
-  using HomeRadar.Core.Model;
   using System.Net.NetworkInformation;
+  using FluentAssertions;
   using Xunit;
+  using DeviceScan = Model.DeviceScan;
 
   /// <summary>
   /// Performs tests to confirm if a device is connected to a network.
@@ -22,21 +21,38 @@ namespace HomeRadar.Core.Tests.DeviceScan
     public void DeviceScan_RunArpSuccessfully()
     {
       // Arrange
-      HomeRadar.Core.DeviceScan scan = new HomeRadar.Core.DeviceScan();
-      Assert.True(string.IsNullOrEmpty(scan.network_adapter.HostName));
-      Assert.Equal(scan.network_adapter.OperatingSystem.ToString(), "WINDOWS");
+      DeviceScan scan = new DeviceScan();
+      Assert.True(string.IsNullOrEmpty(scan.NetworkAdapter.HostName));
+      Assert.Equal("WINDOWS", scan.NetworkAdapter.OperatingSystem.ToString());
+      scan.NetworkAdapter.OperatingSystem.ToString().Should().Be("WINDOWS");
 
+
+      // Act
       // Run scan
       scan.GetDeviceDetails();
 
+      // Assert
+
+      // ToDo: Note - Assertions should be
+      // Assertion(expected, actual);
+
       // Strings should be set
-      Assert.False(string.IsNullOrEmpty(scan.network_adapter.HostName));
-      Assert.False(string.IsNullOrEmpty(scan.network_adapter.NetworkName));
-      Assert.False(string.IsNullOrEmpty(scan.network_adapter.Ipv4));
-      Assert.False(string.IsNullOrEmpty(scan.network_adapter.MacAddress));
+      Assert.False(string.IsNullOrEmpty(scan.NetworkAdapter.HostName));
+      Assert.False(string.IsNullOrEmpty(scan.NetworkAdapter.NetworkName));
+      Assert.False(string.IsNullOrEmpty(scan.NetworkAdapter.Ipv4));
+      Assert.False(string.IsNullOrEmpty(scan.NetworkAdapter.MacAddress));
+
+      // These assertions are the same as the above but use the Fluent Assertions framework.
+      // I think they are nicer to read.
+      // Up to you whether you use fluent assertions or standard xUnit, I prefer fluent.
+      string.IsNullOrEmpty(scan.NetworkAdapter.HostName).Should().BeFalse();
+      string.IsNullOrEmpty(scan.NetworkAdapter.NetworkName).Should().BeFalse();
+      string.IsNullOrEmpty(scan.NetworkAdapter.Ipv4).Should().BeFalse();
+      string.IsNullOrEmpty(scan.NetworkAdapter.MacAddress).Should().BeFalse();
 
       // Status should be up
-      Assert.Equal(scan.network_adapter.OperationalStatus, OperationalStatus.Up);
+      Assert.Equal(OperationalStatus.Up, scan.NetworkAdapter.OperationalStatus);
+      scan.NetworkAdapter.OperationalStatus.Should().Be(OperationalStatus.Up);
 
       scan.FindDevices();
     }
