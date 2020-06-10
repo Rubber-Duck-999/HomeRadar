@@ -15,8 +15,14 @@
                 <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
                 <Setter Property="BarTextColor" Value="White" />
             </Style>
-            
+
             <!-- FutureInnovationTech Styles -->
+
+            <OnPlatform x:Key="XLargeFontSize"
+                        x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="80" />
+                <On Platform="Android, UWP, WinRT, WinPhone" Value="72" />
+            </OnPlatform>
 
             <OnPlatform x:Key="LargeFontSize"
                         x:TypeArguments="x:Double">
