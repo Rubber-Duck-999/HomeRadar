@@ -67,6 +67,12 @@ namespace HomeRadar.ViewModels
         ViewModelToLoad = typeof(PrimaryViewModel),
         MenuItemType = MenuItemType.Home,
       });
+      this.MenuItems.Add(new MainMenuItem
+      {
+        MenuText = "Scan",
+        ViewModelToLoad = typeof(ScanViewModel),
+        MenuItemType = MenuItemType.Scan,
+      });
     }
 
     /// <summary>

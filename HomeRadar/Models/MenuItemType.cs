@@ -13,5 +13,10 @@ namespace HomeRadar.Models
     /// Represents the Home Menu Item.
     /// </summary>
     Home,
+
+    /// <summary>
+    /// Represents the Scan Menu Item.
+    /// </summary>
+    Scan,
   }
 }
