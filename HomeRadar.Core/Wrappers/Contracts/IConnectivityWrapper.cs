@@ -2,9 +2,9 @@
 // Copyright (c) FutureInnovationTech. All rights reserved.
 // </copyright>
 
-namespace HomeRadar.Wrappers
+namespace HomeRadar.Core.Wrappers.Contracts
 {
-  using Xamarin.Essentials;
+  using HomeRadar.Core.Model;
 
   /// <summary>
   /// Defines the interface for wrapper 3rd party connectivity providers.
@@ -15,6 +15,6 @@ namespace HomeRadar.Wrappers
     /// Provides the type of access currently available.
     /// </summary>
     /// <returns>A NetworkAccess value.</returns>
-    NetworkAccess TypeOfAccess();
+    NetworkAccessType TypeOfAccess();
   }
 }

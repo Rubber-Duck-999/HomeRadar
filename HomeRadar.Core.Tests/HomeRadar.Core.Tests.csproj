@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HomeRadar\HomeRadar.csproj" />
+    <ProjectReference Include="..\HomeRadar.Core\HomeRadar.Core.csproj" />
   </ItemGroup>
 
 </Project>

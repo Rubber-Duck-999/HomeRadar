@@ -2,12 +2,8 @@
 // Copyright (c) FutureInnovationTech. All rights reserved.
 // </copyright>
 
-namespace HomeRadar.Contracts
+namespace HomeRadar.Core.Contracts
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Text;
-
   /// <summary>
   /// Defines the interface for confirming the device is connected to a network.
   /// </summary>

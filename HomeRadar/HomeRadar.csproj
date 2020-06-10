@@ -29,6 +29,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HomeRadar.Core\HomeRadar.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Views\PrimaryView.xaml.cs">
       <DependentUpon>PrimaryView.xaml</DependentUpon>
     </Compile>

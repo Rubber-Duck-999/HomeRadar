@@ -2,31 +2,23 @@
 // Copyright (c) FutureInnovationTech. All rights reserved.
 // </copyright>
 
-namespace HomeRadar.Services
+namespace HomeRadar.Core.Services
 {
   using System;
-  using System.ComponentModel;
-  using System.Runtime.CompilerServices;
-  using Annotations;
-  using HomeRadar.Contracts;
-  using HomeRadar.Wrappers;
-  using Xamarin.Essentials;
+  using HomeRadar.Core.Contracts;
+  using HomeRadar.Core.Model;
+  using HomeRadar.Core.Wrappers.Contracts;
 
   /// <summary>
   /// Implements the IConnectionStatusProvider to provide connection status information
   /// using Xamarin.Essentials.
   /// </summary>
-  public class ConnectionStatusProvider : IConnectionStatusProvider, INotifyPropertyChanged
+  public class ConnectionStatusProvider : IConnectionStatusProvider
   {
     /// <summary>
     /// Provides access to the connectivity wrapper.
     /// </summary>
     private readonly IConnectivityWrapper connectivityWrapper;
-
-    /// <summary>
-    /// The following attribute stores whether or not the device is connected to a network.
-    /// </summary>
-    private bool isConnected;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ConnectionStatusProvider"/> class.
@@ -39,18 +31,7 @@ namespace HomeRadar.Services
     }
 
     /// <inheritdoc/>
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    /// <inheritdoc/>
-    public bool IsConnected
-    {
-      get => this.isConnected;
-      set
-      {
-        this.isConnected = value;
-        this.OnPropertyChanged(nameof(this.IsConnected));
-      }
-    }
+    public bool IsConnected { get; set; }
 
     /// <inheritdoc/>
     public void CheckConnection()
@@ -60,31 +41,21 @@ namespace HomeRadar.Services
     }
 
     /// <summary>
-    /// Forwards the notification to the app that a property has changed.
-    /// </summary>
-    /// <param name="propertyName">The name of the property that has changed.</param>
-    [NotifyPropertyChangedInvocator]
-    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-    {
-      this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    /// <summary>
     /// Updates the apps connectivity based on NetworkAccess.
     /// </summary>
     /// <param name="connectivityType">Current connectivity type.</param>
     /// <exception cref="ArgumentOutOfRangeException">Argument is not valid.</exception>
-    private void UpdateConnectivity(NetworkAccess connectivityType)
+    private void UpdateConnectivity(NetworkAccessType connectivityType)
     {
       switch (connectivityType)
       {
-        case NetworkAccess.Unknown:
-        case NetworkAccess.None:
+        case NetworkAccessType.Unknown:
+        case NetworkAccessType.None:
           this.IsConnected = false;
           break;
-        case NetworkAccess.Local:
-        case NetworkAccess.Internet:
-        case NetworkAccess.ConstrainedInternet:
+        case NetworkAccessType.Local:
+        case NetworkAccessType.Internet:
+        case NetworkAccessType.ConstrainedInternet:
           this.IsConnected = true;
           break;
         default:

@@ -22,6 +22,22 @@ jobs:
       run: |
         cd ..
         ls
+        
+  Core:
+
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+      
+    - name: .NET Core
+      run: |
+          echo Starting
+          cd HomeRadar.Core
+          dotnet build
+  
+        
+        
   Android:
 
     runs-on: macos-latest
@@ -61,6 +77,6 @@ jobs:
     - name: Run
       run: |
         nuget restore
-        cd HomeRadar.Tests
+        cd HomeRadar.Core.Tests
         ls
         dotnet test
