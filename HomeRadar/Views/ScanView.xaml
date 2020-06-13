@@ -16,6 +16,7 @@
                         Text="{Binding ScanButtonText}" 
                         FontSize="{StaticResource XLargeFontSize}"
                         Command="{Binding ScanCommand}" IsEnabled="{Binding IsScanEnabled}"></Button>
+                <Label Text="{Binding ScanTypeText}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"></Label>
             </StackLayout>
 
           <!-- ToDo: This could be updated to use a picker instead -->

@@ -22,9 +22,14 @@ namespace HomeRadar.ViewModels
     private bool isScanEnabled;
 
     /// <summary>
-    /// Determine which scan type to use.
+    /// Determines which scan type to use.
     /// </summary>
     private ScanTypes scanType = ScanTypes.None;
+
+    /// <summary>
+    /// Holds the scan type in text format.
+    /// </summary>
+    private string scanTypeText;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ScanViewModel"/> class.
@@ -57,6 +62,22 @@ namespace HomeRadar.ViewModels
     /// Gets the scan button text.
     /// </summary>
     public string ScanButtonText => "Scan";
+
+    /// <summary>
+    /// Gets or sets the scan type text.
+    /// </summary>
+    public string ScanTypeText
+    {
+      get => this.scanTypeText;
+      set
+      {
+        if (this.scanTypeText != value)
+        {
+          this.scanTypeText = value;
+          this.OnPropertyChanged(nameof(this.ScanTypeText));
+        }
+      }
+    }
 
     /// <summary>
     /// Gets the command to be executed when a scan is triggered.
@@ -120,6 +141,7 @@ namespace HomeRadar.ViewModels
     /// </summary>
     private void AllScanTapped()
     {
+      this.ScanTypeText = "All Scan Selected";
       this.scanType = ScanTypes.All;
       this.EnableScan();
     }
@@ -129,6 +151,7 @@ namespace HomeRadar.ViewModels
     /// </summary>
     private void DevicesOnlyScanTapped(object obj)
     {
+      this.ScanTypeText = "Devices Only Scan Selected";
       this.scanType = ScanTypes.DevicesOnly;
       this.EnableScan();
     }
@@ -138,6 +161,7 @@ namespace HomeRadar.ViewModels
     /// </summary>
     private void IntensiveScanTapped(object obj)
     {
+      this.ScanTypeText = "Intensive Scan Selected";
       this.scanType = ScanTypes.Intensive;
       this.EnableScan();
     }
@@ -147,6 +171,7 @@ namespace HomeRadar.ViewModels
     /// </summary>
     private void IntrusiveScanTapped(object obj)
     {
+      this.ScanTypeText = "Intrusive Scan Selected";
       this.scanType = ScanTypes.Intrusive;
       this.EnableScan();
     }
@@ -164,6 +189,7 @@ namespace HomeRadar.ViewModels
     /// </summary>
     private void DisableScan()
     {
+      this.ScanTypeText = "No Scan Selected.";
       this.IsScanEnabled = false;
     }
   }
