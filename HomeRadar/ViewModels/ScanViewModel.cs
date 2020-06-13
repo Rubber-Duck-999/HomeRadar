@@ -4,8 +4,11 @@
 
 namespace HomeRadar.ViewModels
 {
+  using System;
+  using System.Windows.Input;
   using HomeRadar.Contracts;
   using HomeRadar.ViewModels.Base;
+  using Xamarin.Forms;
 
   /// <summary>
   /// The following class defines the ViewModel for the Scan view.
@@ -26,5 +29,23 @@ namespace HomeRadar.ViewModels
     /// Gets the scan button text.
     /// </summary>
     public string ScanButtonText => "Scan";
+
+    /// <summary>
+    /// Gets the command to be executed when a scan is triggered.
+    /// </summary>
+    public ICommand ScanCommand => new Command(this.OnScanTapped);
+
+    /// <summary>
+    /// Performs a scan.
+    /// </summary>
+    private async void OnScanTapped()
+    {
+      // ToDo: Call backend code that will perform a scan.
+      // The object to do this will need to be injected in through the constructor and kept as a private member variable.
+      // It will also need to be hooked up with the Dependency Injection container in AppContainer.
+      // Once complete where are you expecting this information to be stored?
+      // Should the current view update to show the results or are we having a separate View that will hold the results of scans?
+      throw new NotImplementedException();
+    }
   }
 }
