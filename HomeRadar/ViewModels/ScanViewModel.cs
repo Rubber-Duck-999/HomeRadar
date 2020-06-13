@@ -16,6 +16,11 @@ namespace HomeRadar.ViewModels
   public class ScanViewModel : ViewModelBase
   {
     /// <summary>
+    /// Determines whether the scan functionality is enabled.
+    /// </summary>
+    private bool isScanEnabled;
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="ScanViewModel"/> class.
     /// </summary>
     /// <param name="navigationService">App navigation service.</param>
@@ -23,6 +28,23 @@ namespace HomeRadar.ViewModels
       : base(navigationService)
     {
       this.ShortTitle = "Scan";
+      this.IsScanEnabled = false;
+    }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the scan functionality is enabled.
+    /// </summary>
+    public bool IsScanEnabled
+    {
+      get => this.isScanEnabled;
+      set
+      {
+        if (this.isScanEnabled != value)
+        {
+          this.isScanEnabled = value;
+          this.OnPropertyChanged(nameof(this.IsScanEnabled));
+        }
+      }
     }
 
     /// <summary>

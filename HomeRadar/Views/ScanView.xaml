@@ -15,7 +15,7 @@
                 <Button VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" 
                         Text="{Binding ScanButtonText}" 
                         FontSize="{StaticResource XLargeFontSize}"
-                        Command="{Binding ScanCommand}"></Button>
+                        Command="{Binding ScanCommand}" IsEnabled="{Binding IsScanEnabled}"></Button>
             </StackLayout>
             <Grid Grid.Row="1" HorizontalOptions="Center" >
                 <Grid.RowDefinitions>
