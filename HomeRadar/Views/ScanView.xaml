@@ -17,6 +17,8 @@
                         FontSize="{StaticResource XLargeFontSize}"
                         Command="{Binding ScanCommand}" IsEnabled="{Binding IsScanEnabled}"></Button>
             </StackLayout>
+
+          <!-- ToDo: This could be updated to use a picker instead -->
             <Grid Grid.Row="1" HorizontalOptions="Center" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
@@ -27,10 +29,10 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Row="1" Text="All"></Button>
-                <Button Grid.Row="2" Text="Devices Only"></Button>
-                <Button Grid.Row="3" Text="Intrusive"></Button>
-                <Button Grid.Row="4" Text="Intensive"></Button>
+                <Button Grid.Row="1" Text="All" Command="{Binding AllScanCommand}"></Button>
+                <Button Grid.Row="2" Text="Devices Only" Command="{Binding DevicesOnlyScanCommand}"></Button>
+                <Button Grid.Row="3" Text="Intensive" Command="{Binding IntensiveScanCommand}"></Button>
+                <Button Grid.Row="4" Text="Intrusive" Command="{Binding IntrusiveScanCommand}"></Button>
             </Grid>
       </Grid>
   </ContentPage.Content>
