@@ -2,7 +2,7 @@
 // Copyright (c) FutureInnovationTech. All rights reserved.
 // </copyright>
 
-namespace HomeRadar.Models
+namespace HomeRadar.Enums
 {
   /// <summary>
   /// Enum for menu item types.
@@ -18,5 +18,7 @@ namespace HomeRadar.Models
     /// Represents the Scan Menu Item.
     /// </summary>
     Scan,
+
+
   }
 }

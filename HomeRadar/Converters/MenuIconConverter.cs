@@ -6,7 +6,7 @@ namespace HomeRadar.Converters
 {
   using System;
   using System.Globalization;
-  using HomeRadar.Models;
+  using HomeRadar.Enums;
   using Xamarin.Forms;
 
   /// <summary>
