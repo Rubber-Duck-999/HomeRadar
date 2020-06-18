@@ -7,6 +7,7 @@ namespace HomeRadar.ViewModels
   using System.Collections.ObjectModel;
   using System.Windows.Input;
   using HomeRadar.Contracts;
+  using HomeRadar.Enums;
   using HomeRadar.Models;
   using HomeRadar.ViewModels.Base;
   using Xamarin.Forms;
@@ -72,6 +73,12 @@ namespace HomeRadar.ViewModels
         MenuText = "Scan",
         ViewModelToLoad = typeof(ScanViewModel),
         MenuItemType = MenuItemType.Scan,
+      });
+      this.MenuItems.Add(new MainMenuItem
+      {
+        MenuText = "Settings",
+        ViewModelToLoad = typeof(SettingsViewModel),
+        MenuItemType = MenuItemType.Settings,
       });
     }
 

@@ -19,6 +19,9 @@ namespace HomeRadar.Enums
     /// </summary>
     Scan,
 
-
+    /// <summary>
+    /// Represents the Settings Menu Item.
+    /// </summary>
+    Settings,
   }
 }

@@ -220,6 +220,7 @@ namespace HomeRadar.Services
       this.mappings.Add(typeof(MenuViewModel), typeof(MenuView));
       this.mappings.Add(typeof(PrimaryViewModel), typeof(PrimaryView));
       this.mappings.Add(typeof(ScanViewModel), typeof(ScanView));
+      this.mappings.Add(typeof(SettingsViewModel), typeof(SettingsView));
     }
   }
 }

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="HomeRadar.Views.SettingsView"
+             BackgroundColor="{StaticResource FutureInnovationTechLight}">
+    <ContentPage.Content>
+        <ScrollView Margin="10,20" >
+            <StackLayout>
+                <StackLayout Padding="0,5">
+                    <Frame BorderColor="{StaticResource FutureInnovationTechDark}" BackgroundColor="{StaticResource FutureInnovationTechDark}">
+                        <Label TextColor="{StaticResource FutureInnovationTechLight}">Notifications</Label>
+                    </Frame>
+                </StackLayout>
+                <StackLayout Padding="0,5">
+                    <Frame BorderColor="{StaticResource FutureInnovationTechDark}" BackgroundColor="{StaticResource FutureInnovationTechDark}">
+                        <Label TextColor="{StaticResource FutureInnovationTechLight}">Theme</Label>
+                    </Frame>
+                </StackLayout>
+                <StackLayout Padding="0,5">
+                    <Frame BorderColor="{StaticResource FutureInnovationTechDark}" BackgroundColor="{StaticResource FutureInnovationTechDark}">
+                        <Label TextColor="{StaticResource FutureInnovationTechLight}">FAQ</Label>
+                    </Frame>
+                </StackLayout>
+                <StackLayout Padding="0,5">
+                    <Frame BorderColor="{StaticResource FutureInnovationTechDark}" BackgroundColor="{StaticResource FutureInnovationTechDark}">
+                        <Label TextColor="{StaticResource FutureInnovationTechLight}">Contact Us</Label>
+                    </Frame>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

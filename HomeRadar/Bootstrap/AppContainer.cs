@@ -9,7 +9,6 @@ namespace HomeRadar.Bootstrap
   using HomeRadar.Contracts;
   using HomeRadar.Services;
   using HomeRadar.ViewModels;
-  using Views;
 
   /// <summary>
   /// The following class registers and resolves dependencies.
@@ -36,6 +35,7 @@ namespace HomeRadar.Bootstrap
       builder.RegisterType<MenuViewModel>();
       builder.RegisterType<PrimaryViewModel>();
       builder.RegisterType<ScanViewModel>();
+      builder.RegisterType<SettingsViewModel>();
 
       // Build
       container = builder.Build();
