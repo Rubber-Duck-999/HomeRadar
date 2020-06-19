@@ -7,12 +7,12 @@ namespace HomeRadar.Core.Model
   using System;
   using System.Collections.Generic;
   using System.Net;
-  using System.Net.Http;
-  using System.Net.Http.Headers;
+
   using System.Net.NetworkInformation;
   using System.Net.Sockets;
   using System.Text;
-  using System.Threading;
+
+
 
   /// <summary>
   /// The following class handles the network scan.
@@ -106,47 +106,6 @@ namespace HomeRadar.Core.Model
         Console.WriteLine("Source : " + e.Source);
         Console.WriteLine("Message : " + e.Message);
       }
-    }
-
-    /// <summary>
-    /// The following method gets the name of the NIC vendor.
-    /// </summary>
-    /// <param name="mac">NIC mac address.</param>
-    /// <returns>NIC vendor name.</returns>
-    public string GetVendor(string mac)
-    {
-      var client = new HttpClient
-      {
-        BaseAddress = new Uri("https://api.macvendors.com/"),
-      };
-
-      // Add an Accept header for JSON format.
-      client.DefaultRequestHeaders.Accept.Add(
-      new MediaTypeWithQualityHeaderValue("application/json"));
-
-      // List data response.
-      // ToDo: Why are we waiting here?
-      Thread.Sleep(2000);
-      HttpResponseMessage response = client.GetAsync(mac).Result;
-
-      // Blocking call! Program will wait here until a response is received or a timeout occurs.
-      string vendor = null;
-      if (response.IsSuccessStatusCode)
-      {
-        // Parse the response body.
-        vendor = response.Content.ReadAsStringAsync().Result;
-      }
-      else
-      {
-        Console.WriteLine($"{(int)response.StatusCode} ({response.ReasonPhrase})");
-      }
-
-      // Make any other calls using HttpClient here.
-      // Dispose once all HttpClient calls are complete. This is not necessary if the containing object will be disposed of;
-      // for example in this case the HttpClient instance will be disposed automatically when the application terminates so the following call is superfluous.
-      client.Dispose();
-
-      return vendor;
     }
   }
 }
