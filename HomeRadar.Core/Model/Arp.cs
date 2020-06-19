@@ -67,6 +67,8 @@ namespace HomeRadar.Core.Model
                     m.Groups["mac"].Value,
                     m.Groups["ip"].Value,
                     vendor);
+                temp.Add(this.counter, deviceTemp);
+                this.counter++;
             }
             return temp;
         }
