@@ -23,15 +23,13 @@ namespace HomeRadar.Core.Tests.DeviceScan
       // Arrange
       var scan = new DeviceScan();
       Assert.True(string.IsNullOrEmpty(scan.NetworkAdapter.HostName));
-      Assert.Equal("WINDOWS", scan.NetworkAdapter.OperatingSystem.ToString());
-      scan.NetworkAdapter.OperatingSystem.ToString().Should().Be("WINDOWS");
+      Assert.Equal("OSX", scan.NetworkAdapter.OperatingSystem.ToString());
+      scan.NetworkAdapter.OperatingSystem.ToString().Should().Be("OSX");
 
 
       // Act
       // Run scan
       scan.GetDeviceDetails();
-
-      throw new NotImplementedException();
     }
   }
 }
