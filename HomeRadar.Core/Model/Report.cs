@@ -49,14 +49,27 @@ namespace HomeRadar.Core.Model
         /// </summary>
         public Report()
         {
-            this.pointsTotal = this.intensiveTotal = this.intrusiveTotal = 0;
+            this.pointsTotal = 0;
+            this.intensiveTotal = 0;
+            this.intrusiveTotal = 0;
+        }
+
+        /// <summary>
+        /// Updates total devices for user report.
+        /// </summary>
+        /// <param name="count">
+        /// Count is the amount of devices found on the network.
+        /// </param>
+        public void AddDevicesCount(int count)
+        {
+            this.devicesTotal = count;
         }
 
         /// <summary>
         /// This function will calculate a score for the report.
         /// </summary>
         /// <returns>
-        /// Int
+        /// Return the report value.
         /// </returns>
         public int CalculateReportTotal()
         {
@@ -70,6 +83,7 @@ namespace HomeRadar.Core.Model
             {
                 this.pointsTotal = Max;
             }
+
 
             return this.pointsTotal;
         }
@@ -85,25 +99,25 @@ namespace HomeRadar.Core.Model
             switch (access_strength)
             {
                 case DatabaseAccess.None:
-                    this.UpdateIntrusiveTotal(5);
+                    this.UpdateIntrusiveTotal(ReportUtils.DatabaseNoneValue);
                     break;
                 case DatabaseAccess.Found:
-                    this.UpdateIntrusiveTotal(-1);
+                    this.UpdateIntrusiveTotal(ReportUtils.DatabaseFoundValue);
                     break;
                 case DatabaseAccess.Remote_Access_Denied:
-                    this.UpdateIntrusiveTotal(7);
+                    this.UpdateIntrusiveTotal(ReportUtils.DatabaseRemoteAccessDenied);
                     break;
                 case DatabaseAccess.Remote_Access_Allowed:
-                    this.UpdateIntrusiveTotal(-5);
+                    this.UpdateIntrusiveTotal(ReportUtils.DatabaseRemoteAccessAllowed);
                     break;
                 case DatabaseAccess.No_Password:
-                    this.UpdateIntrusiveTotal(-15);
+                    this.UpdateIntrusiveTotal(ReportUtils.DatabaseNoPassword);
                     break;
                 case DatabaseAccess.Password_Cracked:
-                    this.UpdateIntrusiveTotal(-10);
+                    this.UpdateIntrusiveTotal(ReportUtils.DatabasePasswordCracked);
                     break;
                 case DatabaseAccess.Admin_Allowed:
-                    this.UpdateIntrusiveTotal(-5);
+                    this.UpdateIntrusiveTotal(ReportUtils.DatabaseAdminAllowed);
                     break;
                 default:
                     this.UpdateIntrusiveTotal(0);
@@ -121,12 +135,14 @@ namespace HomeRadar.Core.Model
         private void UpdateIntrusiveTotal(int update)
         {
             // Checks whether its less than min if so set value to min
-            if ((this.intrusiveTotal - update) >= Min)
+            int temp = this.intrusiveTotal + update;
+            if (temp >= Min)
             {
                 // Checks whether its more than max and if so set to max
-                if ((this.intrusiveTotal + update) <= Max)
+                if (temp <= Max)
                 {
-                    this.intrusiveTotal += update;
+                    this.intrusiveTotal = this.intrusiveTotal +
+                        update;
                 }
                 else
                 {
@@ -148,12 +164,13 @@ namespace HomeRadar.Core.Model
         private void UpdateIntensiveTotal(int update)
         {
             // Checks whether its less than min if so set value to min
-            if ((this.intensiveTotal - update) >= Min)
+            int temp = this.intensiveTotal - update;
+            if (temp >= Min)
             {
                 // Checks whether its more than max and if so set to max
-                if ((this.intensiveTotal + update) <= Max)
+                if (temp <= Max)
                 {
-                    this.intensiveTotal += update;
+                    this.intensiveTotal = this.intensiveTotal + update;
                 }
                 else
                 {

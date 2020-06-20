@@ -26,7 +26,42 @@ namespace HomeRadar.Core.Model
     /// <summary>
     /// Report utils class.
     /// </summary>
-    internal class ReportUtils
+    public class ReportUtils
     {
+        /// <summary>
+        /// None value for report total.
+        /// </summary>
+        public const int DatabaseNoneValue = 0;
+
+        /// <summary>
+        /// Found value for report total.
+        /// </summary>
+        public const int DatabaseFoundValue = -2;
+
+        /// <summary>
+        /// Remote access value for report total.
+        /// </summary>
+        public const int DatabaseRemoteAccessAllowed = -5;
+
+        /// <summary>
+        /// Remote denied value for report total.
+        /// </summary>
+        public const int DatabaseRemoteAccessDenied = 5;
+
+        /// <summary>
+        /// No password value for report total.
+        /// </summary>
+        public const int DatabaseNoPassword = -10;
+
+        /// <summary>
+        /// Password cracked value for report total.
+        /// </summary>
+        public const int DatabasePasswordCracked = -15;
+
+        /// <summary>
+        /// Admin login allowed value for report total.
+        /// </summary>
+        public const int DatabaseAdminAllowed = -5;
+
     }
 }
