@@ -30,8 +30,6 @@ namespace HomeRadar.Core.Tests.DeviceScan
       // Act
       // Run scan
       scan.GetDeviceDetails();
-
-      throw new NotImplementedException();
     }
   }
 }
