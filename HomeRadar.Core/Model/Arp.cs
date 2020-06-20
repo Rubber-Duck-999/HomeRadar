@@ -34,7 +34,6 @@ namespace HomeRadar.Core.Model
         /// </summary>
         public Arp()
         {
-            // ToDo: What is the reply address and where do we get it from?
             this.pProcess = new System.Diagnostics.Process
             {
                 StartInfo =
@@ -70,6 +69,7 @@ namespace HomeRadar.Core.Model
                 temp.Add(this.counter, deviceTemp);
                 this.counter++;
             }
+
             return temp;
         }
 
