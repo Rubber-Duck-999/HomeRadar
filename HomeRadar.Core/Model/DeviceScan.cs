@@ -12,8 +12,6 @@ namespace HomeRadar.Core.Model
   using System.Net.Sockets;
   using System.Text;
 
-
-
   /// <summary>
   /// The following class handles the network scan.
   /// </summary>

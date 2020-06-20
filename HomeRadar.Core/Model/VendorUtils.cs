@@ -1,4 +1,6 @@
-﻿
+﻿// <copyright file="VendorUtils.cs" company="FutureInnovationTech">
+// Copyright (c) FutureInnovationTech. All rights reserved.
+// </copyright>
 
 namespace HomeRadar.Core.Model
 {
@@ -47,7 +49,8 @@ namespace HomeRadar.Core.Model
 
             // Make any other calls using HttpClient here.
             // Dispose once all HttpClient calls are complete. This is not necessary if the containing object will be disposed of;
-            // for example in this case the HttpClient instance will be disposed automatically when the application terminates so the following call is superfluous.
+            // for example in this case the HttpClient instance will be disposed automatically when
+            // the application terminates so the following call is superfluous.
             client.Dispose();
 
             return vendor;
