@@ -24,7 +24,7 @@ namespace HomeRadar.Core.Tests.DeviceScan
       var scan = new DeviceScan();
       Assert.True(string.IsNullOrEmpty(scan.NetworkAdapter.HostName));
       Assert.Equal("WINDOWS", scan.NetworkAdapter.OperatingSystem.ToString());
-      scan.NetworkAdapter.OperatingSystem.ToString().Should().Be("WINDOWS");
+      scan.NetworkAdapter.OperatingSystem.ToString().Should().Be("OSX");
 
 
       // Act
