@@ -52,5 +52,12 @@ namespace HomeRadar.Core.Tests.Report
             // Again get report total
             Assert.Equal(ReportUtils.DatabaseRemoteAccessDenied, report.CalculateReportTotal());
         }
+
+        [Fact]
+        public void RunPort()
+        {
+            PortScanner port = new PortScanner();
+            port.Run();
+        }
     }
 }

@@ -5,7 +5,8 @@
 namespace HomeRadar.ViewModels
 {
   using HomeRadar.Contracts;
-  using HomeRadar.ViewModels.Base;
+    using HomeRadar.Core.Model;
+    using HomeRadar.ViewModels.Base;
 
   /// <summary>
   /// The following class defines the ViewModel for the Scan view.
@@ -20,6 +21,8 @@ namespace HomeRadar.ViewModels
       : base(navigationService)
     {
       this.ShortTitle = "Scan";
+      PortScanner new_port = new PortScanner();
+            new_port.Run();
     }
 
     /// <summary>
