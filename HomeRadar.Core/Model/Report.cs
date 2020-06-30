@@ -26,7 +26,7 @@ namespace HomeRadar.Core.Model
         /// <summary>
         /// Collection of devices on the network.
         /// </summary>
-        private int devicesTotal;
+        private uint devicesTotal;
 
         /// <summary>
         /// Points total collected, set to max initially.
@@ -55,12 +55,39 @@ namespace HomeRadar.Core.Model
         }
 
         /// <summary>
+        /// Assign and run the required type of scan.
+        /// </summary>
+        /// <param name="type">
+        /// Scan type for which scan to run.
+        /// </param>
+        public void CreateReport(ScanType type)
+        {
+            switch (type)
+            {
+                case ScanType.All:
+                    this.RunDeviceScan();
+                    this.RunIntrusiveScan();
+                    this.RunIntensiveScan();
+                    break;
+                case ScanType.Device:
+                    this.RunDeviceScan();
+                    break;
+                case ScanType.Intrusive:
+                    break;
+                case ScanType.Intensive:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        /// <summary>
         /// Updates total devices for user report.
         /// </summary>
         /// <param name="count">
         /// Count is the amount of devices found on the network.
         /// </param>
-        public void AddDevicesCount(int count)
+        public void AddDevicesCount(uint count)
         {
             this.devicesTotal = count;
         }
@@ -122,6 +149,37 @@ namespace HomeRadar.Core.Model
                 default:
                     this.UpdateIntrusiveTotal(0);
                     break;
+            }
+        }
+
+        /// <summary>
+        /// Intensive scan call through.
+        /// </summary>
+        private void RunIntensiveScan()
+        {
+            int count = 0;
+            count++;
+        }
+
+        /// <summary>
+        /// Intrusive scan call through.
+        /// </summary>
+        private void RunIntrusiveScan()
+        {
+            int count = 0;
+            count++;
+        }
+
+        /// <summary>
+        /// Get devices.
+        /// </summary>
+        private void RunDeviceScan()
+        {
+            DeviceScan scan = new DeviceScan();
+            uint count = scan.FindDevices();
+            if (count != this.devicesTotal)
+            {
+                this.AddDevicesCount(count);
             }
         }
 

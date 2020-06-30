@@ -9,12 +9,23 @@ namespace HomeRadar.Core.Model
     using System.Text;
 
     /// <summary>
+    /// ScanType enum for the report setup.
+    /// </summary>
+    public enum ScanType
+    {
+        All, // All type for scan
+        Device,
+        Intrusive,
+        Intensive,
+    }
+
+    /// <summary>
     /// DatabaseAccess is for defining what state the app
     /// could hit a local sql database at.
     /// </summary>
     public enum DatabaseAccess
     {
-        None,  // 0 - No database
+        None,  // 0 - No database.
         Found,  // 1 - SQL Database found
         Remote_Access_Allowed,  // 2 - Allows remote acces
         Remote_Access_Denied,  // 3 - Denies remote access

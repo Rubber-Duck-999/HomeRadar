@@ -11,7 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeRadar", "HomeRadar\Home
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeRadar.Core.Tests", "HomeRadar.Core.Tests\HomeRadar.Core.Tests.csproj", "{0C0BF181-C3EA-4F0B-B83C-42FC021B56B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRadar.Core", "HomeRadar.Core\HomeRadar.Core.csproj", "{BC34EBD1-D0C1-41CD-95F6-63E48A6EA0F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeRadar.Core", "HomeRadar.Core\HomeRadar.Core.csproj", "{BC34EBD1-D0C1-41CD-95F6-63E48A6EA0F8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{34AB0623-04DC-4D84-AEFC-A2277A553B24}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

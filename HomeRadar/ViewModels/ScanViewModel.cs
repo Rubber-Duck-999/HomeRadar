@@ -21,8 +21,6 @@ namespace HomeRadar.ViewModels
       : base(navigationService)
     {
       this.ShortTitle = "Scan";
-      PortScanner new_port = new PortScanner();
-            new_port.Run();
     }
 
     /// <summary>

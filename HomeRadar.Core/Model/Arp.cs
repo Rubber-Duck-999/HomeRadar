@@ -23,12 +23,6 @@ namespace HomeRadar.Core.Model
         /// </summary>
         private readonly string pattern = @"(?<ip>([0-0]{1,3}\.?){4})\s*(?<mac>([a-f0-9]{2}-/){6})";
 
-
-        /// <summary>
-        /// Counter for devices
-        /// </summary>
-        private uint counter;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Arp"/> class.
         /// </summary>
@@ -48,6 +42,11 @@ namespace HomeRadar.Core.Model
         }
 
         /// <summary>
+        /// Gets or sets Counter for devices.
+        /// </summary>
+        public uint Counter { get; set; }
+
+        /// <summary>
         /// The following method finds the devices on the network.
         /// </summary>
         /// <returns>A dictionary of devices.</returns>
@@ -57,7 +56,7 @@ namespace HomeRadar.Core.Model
 
             var temp = new Dictionary<uint, Device>();
             string strOutput = this.pProcess.StandardOutput.ReadToEnd();
-            this.counter = 0;
+            this.Counter = 0;
 
             foreach (Match m in Regex.Matches(strOutput, this.pattern, RegexOptions.IgnoreCase))
             {
@@ -66,8 +65,8 @@ namespace HomeRadar.Core.Model
                     m.Groups["mac"].Value,
                     m.Groups["ip"].Value,
                     vendor);
-                temp.Add(this.counter, deviceTemp);
-                this.counter++;
+                temp.Add(this.Counter, deviceTemp);
+                this.Counter++;
             }
 
             return temp;
