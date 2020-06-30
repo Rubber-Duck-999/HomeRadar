@@ -4,9 +4,11 @@
 
 namespace HomeRadar.ViewModels
 {
+    using System;
     using System.Threading.Tasks;
     using HomeRadar.Contracts;
     using HomeRadar.ViewModels.Base;
+    using Xamarin.Essentials;
 
     /// <summary>
     /// The following class defines the ViewModel for the Main page view.
@@ -14,16 +16,22 @@ namespace HomeRadar.ViewModels
     public class MainViewModel : ViewModelBase
     {
         private MenuViewModel menuViewModel;
+        private readonly ILog logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainViewModel"/> class.
         /// </summary>
         /// <param name="navigationService">App navigation service.</param>
         /// <param name="menuViewModel">The MenuViewModel.</param>
-        public MainViewModel(INavigationService navigationService, MenuViewModel menuViewModel)
+        /// <param name="logger">The app logger.</param>
+        public MainViewModel(
+            INavigationService navigationService,
+            MenuViewModel menuViewModel,
+            ILog logger)
           : base(navigationService)
         {
             this.menuViewModel = menuViewModel;
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         /// <summary>
@@ -46,6 +54,7 @@ namespace HomeRadar.ViewModels
         /// <returns>A task.</returns>
         public override async Task InitializeAsync(object data)
         {
+            this.logger.Info(AppInfo.Name, $"Starting {nameof(PrimaryViewModel)}.");
             await Task.WhenAll(
               this.menuViewModel.InitializeAsync(data),
               this.NavigationService.NavigateToAsync<PrimaryViewModel>());
